@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFID Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <h1>🔐 RFID Dashboard</h1>
+        <ul>
+            <li><a href="#" onclick="showPage('dashboard')">Dashboard</a></li>
+            <li><a href="#" onclick="showPage('users')">Utilisateurs</a></li>
+            <li><a href="#" onclick="showPage('transactions')">Transactions</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="page active">
+        <h2>Vue générale</h2>
+        <div class="cards">
+            <div class="card">
+                <h3>Total Utilisateurs</h3>
+                <p id="total-users">--</p>
+            </div>
+            <div class="card">
+                <h3>Total Transactions</h3>
+                <p id="total-transactions">--</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Utilisateurs -->
+    <div id="users" class="page">
+        <h2>Utilisateurs</h2>
+
+        <!-- Formulaire ajout -->
+        <div class="form-box">
+            <h3>Ajouter un utilisateur</h3>
+            <input type="text" id="uid" placeholder="UID RFID" />
+            <input type="text" id="nom" placeholder="Nom complet" />
+            <input type="email" id="email" placeholder="Email" />
+            <button onclick="addUser()">Ajouter</button>
+        </div>
+
+        <!-- Liste utilisateurs -->
+        <table>
+            <thead>
+                <tr>
+                    <th>UID RFID</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Solde</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="users-table">
+                <tr>
+                    <td colspan="5">Chargement...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Transactions -->
+    <div id="transactions" class="page">
+        <h2>Historique des transactions</h2>
+
+        <!-- Formulaire transaction -->
+        <div class="form-box">
+            <h3>Ajouter une transaction</h3>
+            <input type="number" id="t-user-id" placeholder="ID Utilisateur" />
+            <input type="number" id="t-montant" placeholder="Montant" />
+            <select id="t-type">
+                <option value="credit">Crédit</option>
+                <option value="debit">Débit</option>
+            </select>
+            <input type="text" id="t-description" placeholder="Description" />
+            <button onclick="addTransaction()">Ajouter</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Montant</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="transactions-table">
+                <tr>
+                    <td colspan="5">Chargement...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
