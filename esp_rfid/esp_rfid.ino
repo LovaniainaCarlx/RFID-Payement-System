@@ -70,7 +70,8 @@ void loop() {
   rfid.PCD_StopCrypto1();
 
   delay(1500);
-}*/
+}
+*/
 #include <WiFi.h>
 #include <HTTPClient.h>
 #include <SPI.h>
@@ -84,7 +85,7 @@ MFRC522 rfid(SS_PIN, RST_PIN);
 
 // 🌐 WiFi
 const char* ssid = "RDB";
-const char* password = "*whenuseeuknoW";
+const char* password = "*whenuseeuknoW*";
 
 // 🌐 Node.js API
 const char* serverURL = "http://192.168.1.62:3000/api/scan";
