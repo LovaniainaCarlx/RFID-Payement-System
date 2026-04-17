@@ -28,6 +28,7 @@ async function loadUsers() {
   users.forEach(u => {
     tbody.innerHTML += `
       <tr>
+        <td>${u.id}</td> 
         <td>${u.uid_rfid}</td>
         <td>${u.nom}</td>
         <td>${u.email || '-'}</td>
@@ -117,6 +118,46 @@ async function addTransaction() {
     alert('Erreur : ' + data.error);
   }
 }
+
+// Scan en temps réel - vérifie toutes les 2 secondes
+let lastUID = null;
+
+async function checkScan() {
+  try {
+    const res = await fetch(`${API}/api/scan/last`, {
+      headers: { 'x-api-key': 'rfid_secret_key_123' }
+    });
+    if (!res.ok) return;
+    
+    const data = await res.json();
+    
+    if (data.uid && data.uid !== lastUID) {
+      lastUID = data.uid;
+      afficherScan(data);
+    }
+  } catch (err) {
+    console.error('Erreur scan:', err);
+  }
+}
+
+function afficherScan(data) {
+  document.getElementById('scan-uid').textContent = data.uid || '-';
+  document.getElementById('scan-nom').textContent = data.nom || 'Inconnu ❌';
+  document.getElementById('scan-email').textContent = data.email || '-';
+  document.getElementById('scan-solde').textContent = data.solde ? data.solde + ' Ar' : '-';
+
+  const status = document.getElementById('scan-status');
+  if (data.nom) {
+    status.textContent = '✅ Carte reconnue !';
+    status.className = 'scan-status success';
+  } else {
+    status.textContent = '❌ Carte non enregistrée';
+    status.className = 'scan-status error';
+  }
+}
+
+// Démarre le polling
+setInterval(checkScan, 2000);
 
 // Charger le dashboard au démarrage
 loadDashboard();

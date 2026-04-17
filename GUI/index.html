@@ -33,13 +33,23 @@
                 <p id="total-transactions">--</p>
             </div>
         </div>
+
+        <!-- ✅ Section Dernier Scan ajoutée ici -->
+        <div class="scan-card">
+            <h3>📡 Dernier Scan RFID</h3>
+            <div class="scan-info">
+                <p><span class="label">UID :</span> <span id="scan-uid">En attente...</span></p>
+                <p><span class="label">Nom :</span> <span id="scan-nom">-</span></p>
+                <p><span class="label">Email :</span> <span id="scan-email">-</span></p>
+                <p><span class="label">Solde :</span> <span id="scan-solde">-</span></p>
+            </div>
+            <div id="scan-status" class="scan-status">⏳ En attente d'un scan...</div>
+        </div>
     </div>
 
     <!-- Utilisateurs -->
     <div id="users" class="page">
         <h2>Utilisateurs</h2>
-
-        <!-- Formulaire ajout -->
         <div class="form-box">
             <h3>Ajouter un utilisateur</h3>
             <input type="text" id="uid" placeholder="UID RFID" />
@@ -47,11 +57,10 @@
             <input type="email" id="email" placeholder="Email" />
             <button onclick="addUser()">Ajouter</button>
         </div>
-
-        <!-- Liste utilisateurs -->
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>UID RFID</th>
                     <th>Nom</th>
                     <th>Email</th>
@@ -70,8 +79,6 @@
     <!-- Transactions -->
     <div id="transactions" class="page">
         <h2>Historique des transactions</h2>
-
-        <!-- Formulaire transaction -->
         <div class="form-box">
             <h3>Ajouter une transaction</h3>
             <input type="number" id="t-user-id" placeholder="ID Utilisateur" />
@@ -83,7 +90,6 @@
             <input type="text" id="t-description" placeholder="Description" />
             <button onclick="addTransaction()">Ajouter</button>
         </div>
-
         <table>
             <thead>
                 <tr>
